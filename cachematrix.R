@@ -3,18 +3,31 @@
 
 ## Write a short comment describing this function
 
-## Changed m to inv and setmean to setinverse for the function. 
+## Changed m to inv and setmean to set inverse for the function. 
 
 
 makeCacheMatrix <- function(x = matrix(sample(1:100, 16), 4, 4)) {
         inv <- NULL
+        
+        # To set the matrix
+        
         set <- function(y) {
                 x <<- y
                 inv <<- NULL
         }
-        get <- function() x
-        setinverse <- function(solveMatrix) inv <<- solveMatrix
-        getinverse <- function() inv 
+        # To get the matrix and retruns x 
+        
+        get <- function() 
+                x
+        
+        # To set the inverse of the matrix
+        
+        setinverse <- function(solveMatrix) 
+                inv <<- solveMatrix
+        
+        # To get the inverse of the matrix
+        getinverse <- function() 
+                inv 
         list(set = set, get = get,
              setinverse = setinverse,
              getinverse = getinverse)
@@ -30,11 +43,14 @@ cacheSolve <- function(x, ...) {
                 message("getting cached data")
                 return(inv)
         }
+        # getting the matrix of the object
         data <- x$get()
+        
+        # Calculate the inverse of the matrix
         inv <- solve(data, ...)
+        
+        # set the inverse of the object and return
         x$setinverse(inv)
         inv
 }
-        ## Return a matrix that is the inverse of 'x'
-        inv
-}
+       
